@@ -1,0 +1,22 @@
+<!-- ... everything above the <script> remains the same ... -->
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // For demo: accept any credentials, just store the user
+            const email = document.getElementById('email').value;
+            // Extract name from email or use a default
+            const userName = email.split('@')[0] || 'User';
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', userName);
+
+            // Check for redirect parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectUrl = urlParams.get('redirect');
+            if (redirectUrl) {
+                window.location.href = decodeURIComponent(redirectUrl);
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
